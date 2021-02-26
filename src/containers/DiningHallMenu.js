@@ -5,14 +5,20 @@ import TopBar from '../components/TopBar';
 import SubMenu from '../components/SubMenu';
 
 const DiningHallMenu = ({navigation, route}) => {
-  const [subMenus, setSubMenus] = useState([]);
-  const [subMenuItems, setSubMenuItems] = useState([]);
+  //const [subMenus, setSubMenus] = useState([]);
+  //const [subMenuItems, setSubMenuItems] = useState([]);
   const [quantities, setQuantities] = useState({});
+  //console.log(quantities)
 
-  function getSubMenus() {
-    let subMenus = Object.keys(route.params.menu);
-    console.log(Object.keys(route.params.menu[subMenus[0]]));
-
+  //function getSubMenus() {
+    let menu = route.params.menu;
+    //let menuNames = Object.keys(menu);
+    //let menuItems = {}
+    // for(let name of menuNames) {
+    //   menuItems[name]
+    // }
+    //console.log("menu names", menuNames);
+    //console.log("example", Object.keys(route.params.menu[menuNames[0]]));
     /*subMenus.forEach((subMenu, i) => {
 
     })
@@ -33,17 +39,46 @@ const DiningHallMenu = ({navigation, route}) => {
       subMenuItems: allSubMenus,
       quantities: {}
     })*/
+  //}
+  function onCalculate() {
+
   }
 
   useEffect(() => {
-    getSubMenus();
+    //getSubMenus();
   }, [])
+
+  let items = []
+  for(let name in menu) {
+    //let name = menuNames[i]
+    //let foods = subMenuItems[name]
+    let foods = menu[name];
+    //console.log(quantities[name] || new Array(foods.length).fill(0))
+    items.push(
+      <SubMenu
+        subMenuName={name}
+        items={foods}
+        quantityHandler={(index, val) => {
+          let q = {...quantities}
+          if(!q[name]) q[name] = new Array(foods.length).fill(0)
+          q[name][index] = parseInt(val)
+          setQuantities(q)
+        }}
+      />
+    )
+  }
 
   return (
     <View style={{paddingBottom: 200}}>
-      <TopBar/>
-
-    </View>
+        <TopBar/>
+        <View style={{flexDirection: 'row', paddingLeft: 20, paddingTop: 20}}>
+          <Text style={{fontSize: 30, fontWeight: 'bold'}}>{route.params.diningHallName}</Text>
+        </View>
+        <ScrollView contentContainerStyle={{padding: 10, paddingLeft: 10, paddingRight: 10}}>
+          { items }
+        </ScrollView>
+        <Button title='Calculate' buttonStyle={{backgroundColor: Colors.primary }} onPress={onCalculate}/>
+      </View>
   )
 }
 

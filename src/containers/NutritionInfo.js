@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 const NutritionInfo = () => {
   return (
     <View>
-      <Text>NutritionInfo</Text>
+      <Text>Nutrition Info</Text>
     </View>
   )
 }

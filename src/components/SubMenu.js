@@ -10,6 +10,9 @@ const SubMenu = ({subMenuName, items, quantityHandler}) => {
     let foodItems = []
     let foodNames = Object.keys(items);
 
+    //console.log(subMenuName, quantities, quantities[subMenuName])
+    //console.log(quantities)
+
     foodNames.forEach((item, i) => {
       foodItems.push(
         <FoodItem
