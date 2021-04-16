@@ -13,6 +13,7 @@ const SubMenu = ({subMenuName, items, quantities, quantityHandler}) => {
     //console.log(subMenuName, quantities, quantities[subMenuName])
     //console.log(quantities)
 
+
     foodNames.forEach((item, i) => {
       foodItems.push(
         <FoodItem
@@ -31,7 +32,7 @@ const SubMenu = ({subMenuName, items, quantities, quantityHandler}) => {
 
   useEffect(() => {
     getFoodItems();
-  }, [])
+  }, [quantities])
 
   return (
     <View style={{flexDirection: 'column', paddingBottom: 40}}>
