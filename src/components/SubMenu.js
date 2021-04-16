@@ -3,7 +3,7 @@ import { Text, View } from 'react-native'
 
 import FoodItem from './FoodItem';
 
-const SubMenu = ({subMenuName, items, quantityHandler}) => {
+const SubMenu = ({subMenuName, items, quantities, quantityHandler}) => {
   const [foodItems, setFoodItems] = useState([]);
 
   function getFoodItems() {
@@ -20,6 +20,7 @@ const SubMenu = ({subMenuName, items, quantityHandler}) => {
           portion={items[item].nutritionInfo.servingSize}
           key={i}
           index={i}
+          quantity={quantities[i]}
           quantityHandler={quantityHandler}
         />
       )

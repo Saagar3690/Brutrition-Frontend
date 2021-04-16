@@ -10,7 +10,8 @@ const initialState = {
   content: '',
   loading: true,
   meals: [],
-  user: {}
+  user: {},
+  quantities: {}
 }
 
 const Ctx = React.createContext(initialState);
@@ -52,6 +53,11 @@ const StateProvider = (props) => {
           return {
             ...state,
             user: action.payload
+          }
+        case 'UPDATE_QUANTITY':
+          return {
+            ...state,
+            quantities: action.payload
           }
 
         default:

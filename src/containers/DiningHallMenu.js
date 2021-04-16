@@ -4,65 +4,49 @@ import { Text, View, Button, ScrollView } from 'react-native'
 import TopBar from '../components/TopBar';
 import SubMenu from '../components/SubMenu';
 
+import { Ctx } from '../StateProvider';
+
 const DiningHallMenu = ({navigation, route}) => {
-  //const [subMenus, setSubMenus] = useState([]);
-  //const [subMenuItems, setSubMenuItems] = useState([]);
-  const [quantities, setQuantities] = useState({});
-  //console.log(quantities)
+  let { state, dispatch } = useContext(Ctx);
+  let quantities = { state };
 
-  //function getSubMenus() {
-    let menu = route.params.menu;
-    //let menuNames = Object.keys(menu);
-    //let menuItems = {}
-    // for(let name of menuNames) {
-    //   menuItems[name]
-    // }
-    //console.log("menu names", menuNames);
-    //console.log("example", Object.keys(route.params.menu[menuNames[0]]));
-    /*subMenus.forEach((subMenu, i) => {
+  let menu = route.params.menu;
 
-    })
-
-    var allSubMenus = {}
-    for (let i = 0; i < tmp.length; i++) {
-      var foodItems = {}
-      for (let j = 0; j < this.state.menu.length; j++) {
-        for (const item in this.state.menu[j][tmp[i]]) {
-          foodItems[item] = this.state.menu[j][tmp[i]][item]
-        }
-      }
-      allSubMenus[tmp[i]] = foodItems
-    }
-
-    this.setState({
-      subMenu: tmp,
-      subMenuItems: allSubMenus,
-      quantities: {}
-    })*/
-  //}
   function onCalculate() {
-
+    for(let name in menu) {
+      let foodNames = Object.keys(menu[name]);
+      for(let i = 0; i < foodNames.length; i++) {
+        let amt = quantities[i];
+        
+      }
+    }
+    console.log(quantities)
   }
 
   useEffect(() => {
     //getSubMenus();
-  }, [])
+
+  })
 
   let items = []
+  console.log("re render menu")
   for(let name in menu) {
-    //let name = menuNames[i]
-    //let foods = subMenuItems[name]
     let foods = menu[name];
-    //console.log(quantities[name] || new Array(foods.length).fill(0))
     items.push(
       <SubMenu
         subMenuName={name}
         items={foods}
+        quantities={quantities[name] || new Array(Object.keys(foods).length).fill(0)}
         quantityHandler={(index, val) => {
-          let q = {...quantities}
-          if(!q[name]) q[name] = new Array(foods.length).fill(0)
-          q[name][index] = parseInt(val)
-          setQuantities(q)
+          let q = {...quantities};
+          if(!q[name]) {
+            q[name] = new Array(Object.keys(foods).length).fill(0);
+          }
+          else {
+            q[name] = q[name].slice();
+          }
+          q[name][index] = parseInt(val);
+          dispatch({ type: 'UPDATE_QUANTITY', payload: q });
         }}
       />
     )

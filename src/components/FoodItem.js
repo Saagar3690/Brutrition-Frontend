@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Text, View, Button, Image, StyleSheet } from 'react-native';
 
-const FoodItem = ({foodName, portion, key, index, quantityHandler}) => {
-  const [value, setValue] = useState(0);
+const FoodItem = ({foodName, portion, key, index, quantity, quantityHandler}) => {
+  // const [value, setValue] = useState(0);
 
-  const handleAdd = () => handleChangeValue(value + 1)
-  const handleSubtract = () => handleChangeValue(Math.max(0, value - 1))
+  const handleAdd = () => handleChangeValue(quantity + 1)
+  const handleSubtract = () => handleChangeValue(Math.max(0, quantity - 1))
   const handleChangeValue = value => {
-    setValue(value);
+    // setValue(value);
     quantityHandler(index, value);
   }
 
@@ -20,7 +20,7 @@ const FoodItem = ({foodName, portion, key, index, quantityHandler}) => {
       </View>
       <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
         <Button title='-' onPress={handleSubtract} style={styles.button}/>
-        <Text style={{ borderColor: 'gray', borderWidth: 2, padding: 6, textAlign: 'center' }} >{value}</Text>
+        <Text style={{ borderColor: 'gray', borderWidth: 2, padding: 6, textAlign: 'center' }} >{quantity}</Text>
         <Button title='+' onPress={handleAdd} style={styles.button}/>
       </View>
     </View>
