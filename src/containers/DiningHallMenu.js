@@ -8,7 +8,7 @@ import { Ctx } from '../StateProvider';
 
 const DiningHallMenu = ({navigation, route}) => {
   let { state, dispatch } = useContext(Ctx);
-  let quantities = { state };
+  let quantities = state['quantities'];
 
   let menu = route.params.menu;
 
@@ -17,19 +17,13 @@ const DiningHallMenu = ({navigation, route}) => {
       let foodNames = Object.keys(menu[name]);
       for(let i = 0; i < foodNames.length; i++) {
         let amt = quantities[i];
-        
+
       }
     }
     console.log(quantities)
   }
 
-  useEffect(() => {
-    //getSubMenus();
-
-  })
-
   let items = []
-  console.log("re render menu")
   for(let name in menu) {
     let foods = menu[name];
     items.push(
@@ -38,7 +32,7 @@ const DiningHallMenu = ({navigation, route}) => {
         items={foods}
         quantities={quantities[name] || new Array(Object.keys(foods).length).fill(0)}
         quantityHandler={(index, val) => {
-          let q = {...quantities};
+          let q = quantities;
           if(!q[name]) {
             q[name] = new Array(Object.keys(foods).length).fill(0);
           }
