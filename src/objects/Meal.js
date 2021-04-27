@@ -23,16 +23,16 @@ export default class Meal {
         this.type = "Midnight Snack"
   }
   get calories() {
-    return this.foods.reduce((accum, food) => accum + parseInt(food.calories) * food.quantity, 0)
+    return this.foods.reduce((accum, food) => accum + parseInt(food.nutritionInfo.calories) * food.quantity, 0)
   }
   get protein() {
-    return this.foods.reduce((accum, food) => accum + parseInt(food.protein) * food.quantity, 0)
+    return this.foods.reduce((accum, food) => accum + parseInt(food.nutritionInfo.protein) * food.quantity, 0)
   }
   get carbs() {
-    return this.foods.reduce((accum, food) => accum + parseInt(food.totalCarbohydrate.val) * food.quantity, 0)
+    return this.foods.reduce((accum, food) => accum + parseInt(food.nutritionInfo.totalCarbohydrate.val) * food.quantity, 0)
   }
   get fat() {
-    return this.foods.reduce((accum, food) => accum + parseInt(food.totalFat.val) * food.quantity, 0)
+    return this.foods.reduce((accum, food) => accum + parseInt(food.nutritionInfo.totalFat.val) * food.quantity, 0)
   }
 
   static parse(obj) {

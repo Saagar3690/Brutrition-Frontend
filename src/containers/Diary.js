@@ -17,10 +17,10 @@ const Diary = ({title}) => {
     let proteins = 0.0
 
     for (let i = 0; i < meal.foods.length; i++) {
-      calories += (meal.foods[i].calories * meal.foods[i].quantity)
-      carbs += (meal.foods[i].totalCarbohydrate.val.substring(0, meal.foods[i].totalCarbohydrate.val.length-1) * meal.foods[i].quantity)
-      fats += (meal.foods[i].totalFat.val.substring(0, meal.foods[i].totalFat.val.length-1) * meal.foods[i].quantity)
-      proteins += (meal.foods[i].protein.substring(0, meal.foods[i].protein.length-1) * meal.foods[i].quantity)
+      calories += (meal.foods[i].nutritionInfo.calories * meal.foods[i].quantity)
+      carbs += (meal.foods[i].nutritionInfo.totalCarbohydrate.val.substring(0, meal.foods[i].nutritionInfo.totalCarbohydrate.val.length-1) * meal.foods[i].quantity)
+      fats += (meal.foods[i].nutritionInfo.totalFat.val.substring(0, meal.foods[i].nutritionInfo.totalFat.val.length-1) * meal.foods[i].quantity)
+      proteins += (meal.foods[i].nutritionInfo.protein.substring(0, meal.foods[i].nutritionInfo.protein.length-1) * meal.foods[i].quantity)
     }
 
     return (
@@ -41,10 +41,10 @@ const Diary = ({title}) => {
 
     for(let i = 0; i < diary[date].length; i++) {
       for (let j = 0; j < diary[date][i].foods.length; j++) {
-        calories += (diary[date][i].foods[j].calories * diary[date][i].foods[j].quantity)
-        carbs += (diary[date][i].foods[j].totalCarbohydrate.val.substring(0, diary[date][i].foods[j].totalCarbohydrate.val.length-1) * diary[date][i].foods[j].quantity)
-        fats += (diary[date][i].foods[j].totalFat.val.substring(0, diary[date][i].foods[j].totalFat.val.length-1) * diary[date][i].foods[j].quantity)
-        proteins += (diary[date][i].foods[j].protein.substring(0, diary[date][i].foods[j].protein.length-1) * diary[date][i].foods[j].quantity)
+        calories += (diary[date][i].foods[j].nutritionInfo.calories * diary[date][i].foods[j].quantity)
+        carbs += (diary[date][i].foods[j].nutritionInfo.totalCarbohydrate.val.substring(0, diary[date][i].foods[j].nutritionInfo.totalCarbohydrate.val.length-1) * diary[date][i].foods[j].quantity)
+        fats += (diary[date][i].foods[j].nutritionInfo.totalFat.val.substring(0, diary[date][i].foods[j].nutritionInfo.totalFat.val.length-1) * diary[date][i].foods[j].quantity)
+        proteins += (diary[date][i].foods[j].nutritionInfo.protein.substring(0, diary[date][i].foods[j].nutritionInfo.protein.length-1) * diary[date][i].foods[j].quantity)
       }
     }
 
@@ -97,8 +97,8 @@ const Diary = ({title}) => {
         diary[state.meals[i].timestamp.format("MMMM DD, YYYY")] = [state.meals[i]]
     }
 
-    let diaryItems = []
 
+    let diaryItems = []
     for (const date in diary) {
       diaryItems.push(
         <View style={{marginTop: 50}}>

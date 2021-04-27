@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Text, View, Button, ScrollView } from 'react-native'
+import { Text, View, Button, ScrollView } from 'react-native';
 
 import TopBar from '../components/TopBar';
 import SubMenu from '../components/SubMenu';
-
+import Meal from '../objects/Meal';
 import { Ctx } from '../StateProvider';
 
 const DiningHallMenu = ({navigation, route}) => {
@@ -13,14 +13,24 @@ const DiningHallMenu = ({navigation, route}) => {
   let menu = route.params.menu;
 
   function onCalculate() {
-    for(let name in menu) {
-      let foodNames = Object.keys(menu[name]);
+    let mealFoods = [];
+    for(let sub in quantities) {
+      let foods = menu[sub];
+      let foodNames = Object.keys(foods);
       for(let i = 0; i < foodNames.length; i++) {
-        let amt = quantities[i];
-
+        let amt = quantities[sub][i];
+        if(amt != 0) {
+          mealFoods.push({...foods[foodNames[i]], quantity: amt, foodName: foodNames[i] });
+        }
       }
     }
-    console.log(quantities)
+    let meal = new Meal(mealFoods, route.params.diningHallName);
+    let foodAmounts = mealFoods.map(food => food.quantity);
+    dispatch({ type: 'ADD_MEAL', payload: meal });
+    navigation.navigate('Nutrition Info', {
+      foodInfos: mealFoods,
+      foodAmounts
+    })
   }
 
   let items = []

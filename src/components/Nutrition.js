@@ -4,6 +4,7 @@ import { Text, View, StyleSheet } from 'react-native';
 import NutritionLabel from './NutritionLabel';
 
 const Nutrition = ({dataSource}) => {
+  let cholesterol = dataSource.cholesterol || { val: 0, dailyVal: 0 };
   return (
     <View>
       <Text style={{fontSize: 18, fontWeight: 'bold', textAlign: 'center'}}>{dataSource.foodName}</Text>
@@ -18,8 +19,8 @@ const Nutrition = ({dataSource}) => {
           saturatedFat={dataSource.saturatedFat.val}
           saturatedFatPercent={dataSource.saturatedFat.dailyVal}
           transFat={dataSource.transFat}
-          cholesterol={dataSource.cholesterol.val}
-          cholesterolPercent={dataSource.cholesterol.dailyVal}
+          cholesterol={cholesterol.val}
+          cholesterolPercent={cholesterol.dailyVal}
           sodium={dataSource.sodium.val}
           sodiumPercent={dataSource.sodium.dailyVal}
           totalCarbs={dataSource.totalCarbohydrate.val}
